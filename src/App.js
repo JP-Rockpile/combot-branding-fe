@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import NikeComponent from './NikeComponent';  // Adjust path as needed
+import LuluComponent from './LuluComponent';  // Adjust path as needed
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [selectedNumber, setSelectedNumber] = useState(null);
+
+    useEffect(() => {
+        // Randomly choose 1 or 2
+        const randomNumber = Math.floor(Math.random() * 2) + 1;
+        setSelectedNumber(randomNumber);
+    }, []);
+
+    return (
+        <div className="App">
+            <div className="App-content">
+                {/* Conditional rendering based on the random number */}
+                {selectedNumber === 1 ? <NikeComponent /> : null}
+                {selectedNumber === 2 ? <LuluComponent /> : null}
+                {!selectedNumber && <div>Loading component...</div>}
+            </div>
+        </div>
+    );
 }
 
 export default App;
